@@ -21,7 +21,7 @@ class BookListView(generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
-            context['username'] =  self.request.user.username
+            context['username'] =  SocialAccount.objects.get(user=self.request.user)
         return context
 
 

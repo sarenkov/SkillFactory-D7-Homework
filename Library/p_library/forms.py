@@ -40,7 +40,7 @@ class ReaderForm(forms.ModelForm):
 
 
 class ProfileCreationForm(forms.ModelForm):
-    
+
     class Meta:
         model = SocialAccount
         fields = ['extra_data']
