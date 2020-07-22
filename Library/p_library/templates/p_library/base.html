@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/my_style.css' %}">
+    <title>Библиотека</title>
+</head>
+<div class="container">
+    <header class="links">
+        <a href="{% url 'p_library:books' %}">Главная</a>
+        <a href="{% url 'p_library:authors' %}">Авторы</a>
+        <a href="{% url 'p_library:publishers' %}">Издатели</a>
+        <a href="{% url 'p_library:readers' %}">Читатели</a>
+
+        {% if username %}
+        <a href="{% url 'p_library:logout' %}">{{ username }}(выйти)</a>
+        {% else %}
+        <a href="{% url 'p_library:login' %}">войти</a>
+        {% endif %}
+
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="links">
+        <a href="{% url 'p_library:book_create' %}">Добавить книгу</a>
+        <a href="{% url 'p_library:author_create' %}">Добавить автора</a>
+        <a href="{% url 'p_library:publisher_create' %}">Добавить издателя</a>
+        <a href="{% url 'p_library:reader_create' %}">Добавить читателя</a>
+    </footer>
+
+</div>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'p_library/base.html' %}
+
+{% block content %}
+
+<h1 class="text-muted">Список авторов</h1>
+
+{% if authors %}
+<table class="table table-sm table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th title="Фото">Аватар</th>
+        <th title="Полное имя">Полное имя</th>
+        <th title="День рождения">День рождения</th>
+        <th title="Страна рождения">Страна</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for author in authors%}
+    <tr>
+        <td title="Фото">
+            {% if author.cover %}
+            <img src="{{ author.cover.url }}" alt="Обложка" width="30" height="40">
+            {% else %}
+            {% load static %}
+            <img src="{% static 'user_avatar_default.png' %}" alt="Обложка" width="30" height="40">
+            {% endif %}
+        </td>
+        <td><a href="{% url 'p_library:author' author.id %}">{{ author.full_name }}</a></td>
+        <td>{{ author.birth_year }}</td>
+        <td>{{ author.country }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<h2>Нет авторов</h2>
+{% endif %}
+
+{% endblock %}

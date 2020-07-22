@@ -1,0 +1,10 @@
+{% extends 'p_library/base_delete_template.html' %}
+
+{% block content %}
+<h1>Уверены, что хотете удалить книгу?</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Удалить">
+    <a href="{% url 'p_library:book' book.id %}"><input type="button" value="Отменить"></a>
+</form>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'p_library/base.html' %}
+
+{% block content %}
+
+<h1 class="text-muted">Список читателей</h1>
+
+{% if readers %}
+<table class="table table-sm table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th>Аватар</th>
+        <th title="Полное имя">Полное имя</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for reader in readers %}
+    <tr>
+        <td title="Фото">
+            {% if reader.cover %}
+            <img src="{{ reader.cover.url }}" alt="Обложка" width="30" height="40">
+            {% else %}
+            {% load static %}
+            <img src="{% static 'user_avatar_default.png' %}" alt="Обложка" width="30" height="40">
+            {% endif %}
+        </td>
+        <td><a href="{% url 'p_library:reader' reader.id %}">{{ reader.full_name }}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<h2>Нет читателей</h2>
+{% endif %}
+
+{% endblock %}

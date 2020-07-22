@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация об издателе</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/my_style.css' %}">
+</head>
+<div class="container">
+    <main>
+        <table class="table">
+            <tbody>
+            <tr>
+                {% if publisher.cover %}
+                <td><img src="{{ publisher.cover.url }}" alt="Сдесь должно быть фото издателя" width="100" height="150">
+                </td>
+                {% else %}
+                <td><img src="{% static 'user_avatar_default.png' %}" alt="Сдесь должно быть фото издателя" width="100"
+                         height="150"></td>
+                {% endif %}
+                <td>
+                    <ul class="list-unstyled">
+                        <li><strong>Название</strong>: {{publisher.name}}</li>
+                        <li><strong>Город</strong>: {{publisher.city}}</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="links">
+            <a href="{% url 'p_library:publishers' %}">
+                <input type="button" value="Назад">
+            </a>
+            <a href="{% url 'p_library:publisher_edit' publisher.pk %}">
+                <input type="button" value="Изменить информацию об издателе">
+            </a>
+            <a href="{% url 'p_library:publisher_delete' publisher.pk %}">
+                <input type="button" value="Удалить издателя">
+            </a>
+        </div>
+    </main>
+</div>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о читателе</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/my_style.css' %}">
+</head>
+<div class="container">
+    <main>
+        {% if reader %}
+        <table class="table">
+            <tbody>
+            <tr>
+                {% if reader.cover %}
+                <td><img src="{{ reader.cover.url }}" alt="Сдесь должно быть фото читателя" width="100" height="150">
+                </td>
+                {% else %}
+                <td><img src="{% static 'user_avatar_default.png' %}" alt="Сдесь должно быть фото читателя" width="100"
+                         height="150"></td>
+                {% endif %}
+                <td>
+                    <ul class="list-unstyled">
+                        <li><strong>Полное имя</strong>: {{reader.full_name}}</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        {% else %}
+        <h2>Нет читателей</h2>
+        {% endif %}
+        <div class="links">
+            <a href="{% url 'p_library:readers' %}">
+                <input type="button" value="Назад">
+            </a>
+            <a href="{% url 'p_library:reader_edit' reader.pk %}">
+                <input type="button" value="Изменить информацию об читателе">
+            </a>
+            <a href="{% url 'p_library:reader_delete' reader.pk %}">
+                <input type="button" value="Удалить читателя">
+            </a>
+        </div>
+    </main>
+</div>
+</html>

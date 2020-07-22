@@ -1,0 +1,38 @@
+{% extends 'p_library/base.html' %}
+
+{% block content %}
+
+<h1 class="text-muted">Список издателей</h1>
+{% if publishers %}
+
+<table class="table table-sm table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th>Аватар</th>
+        <th>Название</th>
+        <th>Город</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for publisher in publishers %}
+    <tr>
+        <td title="Фото">
+            {% if publisher.cover %}
+            <img src="{{ publisher.cover.url }}" alt="Обложка" width="30" height="40">
+            {% else %}
+            {% load static %}
+            <img src="{% static 'user_avatar_default.png' %}" alt="Обложка" width="30" height="40">
+            {% endif %}
+        </td>
+        <td><a href="{% url 'p_library:publisher' publisher.id %}">{{ publisher.name }}</a></td>
+        <td>{{ publisher.city }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<h2>Нет издателей</h2>
+{% endif %}
+
+{% endblock %}}

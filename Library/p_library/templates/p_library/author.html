@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация об авторе</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/my_style.css' %}">
+</head>
+<div class="container">
+    <main>
+        <table class="table">
+            <tbody>
+            <tr>
+                {% if author.cover %}
+                <td><img src="{{ author.cover.url }}" alt="Сдесь должно быть фото автора" width="100" height="100"></td>
+                {% else %}
+                <td><img src="{% static 'user_avatar_default.png' %}" alt="Сдесь должно быть фото автора" width="100"
+                         height="100"></td>
+                {% endif %}
+                <td>
+                    <ul class="list-unstyled">
+                        <li><strong>Полное имя</strong>: {{author.full_name}}</li>
+                        <li><strong>День рождения</strong>: {{author.birth_year}}</li>
+                        <li><strong>Страна</strong>: {{author.country}}</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="links">
+            <a href="{% url 'p_library:authors' %}"><input type="button" value="Назад"></a>
+            <a href="{% url 'p_library:author_edit' author.pk %}"><input type="button"
+                                                                         value="Изменить информацию об авторе"></a>
+            <a href="{% url 'p_library:author_delete' author.pk %}"><input type="button" value="Удалить автора"></a>
+        </div>
+    </main>
+</div>
+</html>

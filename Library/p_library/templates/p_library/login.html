@@ -1,0 +1,15 @@
+{% extends 'p_library/base.html' %}
+
+{% block content %}
+
+<h3>Уже зарегистрированы? Тогда введитете логин и пароль:</h3>
+<form action="" method="post">
+    {% if message %}
+    <p style="color: red">{{ message }}</p>
+    {% endif %}
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <input type="submit" value="Войти">
+</form>
+<h3>Нет учетной записи? <a href="{% url 'p_library:register' %}">Зарегистрируй</a> </h3>
+{% endblock %}

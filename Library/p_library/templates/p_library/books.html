@@ -1,0 +1,50 @@
+{% extends 'p_library/base.html' %}
+
+{% block content %}
+
+<h1 class="text-muted">Список книг библиотеки</h1>
+{% if books %}
+
+<table class="table table-sm table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th>Обложка</th>
+        <th>Название</th>
+        <th>ISBN</th>
+        <th>Автор</th>
+        <th>Страна</th>
+        <th>Количество</th>
+        <th>Читает</th>
+    </tr>
+    </thead>
+    {% for book in books %}
+    <tr>
+        <td title="Обложка">
+            {% if book.cover %}
+            <img src="{{ book.cover.url }}" alt="Обложка" width="30" height="40">
+            {% else %}
+            {% load static %}
+            <img src="{% static 'book_cover_default.jpeg' %}" alt="Обложка" width="30" height="40">
+            {% endif %}
+        </td>
+        <td title="Название книги"><a href="/p_library/book/{{ book.id }}">{{ book.title }}</a></td>
+        <td title="ISBN">{{ book.ISBN }}</td>
+        <td title="Имя автора">{{ book.author.full_name }}</td>
+        <td title="Страна автора">{{ book.author.country }}</td>
+        <td title="Количество копий в библиотеке">{{ book.copy_count }}</td>
+        <td>
+            {%if book.friend %}
+            {{ book.friend }}
+            {% else %}
+            -
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<h2>В библиотеке нет книг</h2>
+{% endif %}
+
+{% endblock %}
